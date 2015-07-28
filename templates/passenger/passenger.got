@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"strings"
 
-	"google.golang.org/{{.Environment}}/datastore"
+	"google.golang.org/{{environment}}/datastore"
 
-	"github.com/coduno/engine/{{.Environment}}/model"
+	"github.com/coduno/engine/{{environment}}/model"
 	"github.com/coduno/engine/util/password"
 
 	"golang.org/x/crypto/bcrypt"

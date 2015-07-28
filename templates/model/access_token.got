@@ -2,7 +2,7 @@ package model
 
 import (
 	"time"
-	"google.golang.org/{{.Environment}}/datastore"
+	"google.golang.org/{{environment}}/datastore"
 )
 
 const AccessTokenKind = "accesstokens"

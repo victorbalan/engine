@@ -1,6 +1,6 @@
 package model
 
-import "google.golang.org/{{.Environment}}/datastore"
+import "google.golang.org/{{environment}}/datastore"
 
 const UserKind = "users"
 

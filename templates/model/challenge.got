@@ -2,7 +2,7 @@ package model
 
 import (
 	"golang.org/x/net/context"
-	"google.golang.org/{{.Environment}}/datastore"
+	"google.golang.org/{{environment}}/datastore"
 )
 
 // ChallengeKind is the kind used to
