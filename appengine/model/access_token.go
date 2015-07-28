@@ -15,7 +15,7 @@ import (
 const AccessTokenKind = "accesstokens"
 
 type AccessToken struct {
-	Value        []byte    `json:"value"`
+	Value        string    `json:"value"`
 	Scopes       []string  `json:"scopes"`
 	Description  string    `json:"description"`
 	Creation     time.Time `json:"creation"`
