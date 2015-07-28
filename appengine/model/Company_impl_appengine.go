@@ -1,7 +1,5 @@
 // This file was automatically generated from "../../templates/model/company.got". Do not edit!
 
-// +build appengine appenginevm
-
 package model
 
 import (

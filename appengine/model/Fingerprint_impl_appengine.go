@@ -1,7 +1,5 @@
 // This file was automatically generated from "../../templates/model/fingerprint.got". Do not edit!
 
-// +build appengine appenginevm
-
 package model
 
 import (
