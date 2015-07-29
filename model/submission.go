@@ -1,6 +1,10 @@
 package model
 
-import "time"
+import (
+	"time"
+
+	"google.golang.org/cloud/datastore"
+)
 
 //go:generate generator
 
@@ -37,5 +41,5 @@ import "time"
 //	}
 type Submission struct {
 	Time time.Time
-	Task Key
+	Task *datastore.Key
 }

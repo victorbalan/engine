@@ -8,7 +8,7 @@
 //
 // at
 //
-//	2015-07-29T12:56:49+03:00
+//	2015-07-29T14:54:30+03:00
 //
 // Do not edit it!
 
@@ -17,44 +17,42 @@ package model
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
+
+	"google.golang.org/appengine/datastore"
 )
 
 type Submissions []Submission
 
 // Write takes a key and the corresponding writes it out to w after marshaling to JSON.
-func (s_ Submission) Write(w http.ResponseWriter, key Key) {
-	body, err := json.Marshal(map[string]Submission{
-		key.Encode(): s_,
-	})
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
+func (s_ Submission) Write(w http.ResponseWriter, key *datastore.Key) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.Write(body)
+	w.Write([]byte(`{"`))
+	w.Write([]byte(strconv.FormatInt(key.IntID(), 10)))
+	w.Write([]byte(`":`))
+	e := json.NewEncoder(w)
+	e.Encode(s_)
+	w.Write([]byte(`}`))
 }
 
 // Write will write out all Entities to w in JSON format.
-func (s_ Submissions) Write(w http.ResponseWriter, keys []Key) {
+func (s_ Submissions) Write(w http.ResponseWriter, keys []*datastore.Key) {
 	if len(keys) != len(s_) {
 		http.Error(w, "length mismatch while writing entities", http.StatusInternalServerError)
 		return
 	}
 
-	tmp := make(map[string]Submission, len(keys))
-	for i := 0; i < len(keys); i++ {
-		tmp[keys[i].String()] = s_[i]
-	}
-
-	body, err := json.Marshal(tmp)
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.Write(body)
+	w.Write([]byte(`{`))
+	e := json.NewEncoder(w)
+	for i := 0; i < len(keys); i++ {
+		w.Write([]byte(`"`))
+		w.Write([]byte(strconv.FormatInt(keys[i].IntID(), 10)))
+		w.Write([]byte(`":`))
+		e.Encode(s_)
+		if i != len(keys) - 1 {
+			w.Write([]byte(`,`))
+		}
+	}
+	w.Write([]byte(`}`))
 }

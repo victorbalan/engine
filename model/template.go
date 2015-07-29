@@ -1,10 +1,12 @@
 package model
 
+import "google.golang.org/cloud/datastore"
+
 //go:generate generator
 
 // Template contains data about a code template assigned to a Task
 type Template struct {
 	Language  string
 	Path      string
-	Challenge Key
+	Challenge *datastore.Key
 }

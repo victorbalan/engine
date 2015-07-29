@@ -1,5 +1,9 @@
 package model
 
+import (
+	"google.golang.org/appengine/datastore"
+)
+
 //go:generate generator
 
 // Challenge is an abstract piece of work that can consist
@@ -19,7 +23,7 @@ type Challenge struct {
 	// affects the rendering of this Challenge with
 	// respect to the user. Therefore it must be
 	// guaranteed to be stable.
-	Tasks []Key
+	Tasks []*datastore.Key
 
 	// To normalize the results of all Tasks
 	//

@@ -1,6 +1,10 @@
 package model
 
-import "time"
+import (
+	"time"
+
+	"google.golang.org/cloud/datastore"
+)
 
 //go:generate generator
 
@@ -21,7 +25,7 @@ type Result struct {
 
 	// Challenge refers to the challenge that this
 	// result provides data for.
-	Challenge Key
+	Challenge *datastore.Key
 
 	// Indicates when the user has started to work on
 	// a Task (meaning as soon as the Task
@@ -40,5 +44,5 @@ type Result struct {
 	// corresponding Task.
 	//
 	// Indexed the same as Challenge.Tasks.
-	FinalSubmissions []Key
+	FinalSubmissions []*datastore.Key
 }
