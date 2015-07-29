@@ -2,8 +2,10 @@ package model
 
 import (
 	"errors"
+	"net/http"
 
 	"golang.org/x/net/context"
+	"google.golang.org/appengine"
 	"google.golang.org/appengine/datastore"
 )
 
@@ -34,4 +36,34 @@ func ({{t}} {{type}}) SaveWithParent(ctx context.Context, parent *datastore.Key)
 // used to query entities of type {{type}}.
 func NewQueryFor{{type}}() *datastore.Query {
 	return datastore.NewQuery({{kind}})
+}
+
+type {{type}}Handler struct{}
+
+func ({{t}} {{type}}Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	ctx := appengine.NewContext(r)
+
+	if r.URL.Path == "" {
+		var results {{slice}}
+		keys, _ := NewQueryFor{{type}}().GetAll(ctx, &results)
+		results.Write(w, keys)
+		return
+	}
+
+	k, _ := datastore.DecodeKey(r.URL.Path)
+	var {{t}}_ {{type}}
+	datastore.Get(ctx, k, &{{t}}_)
+	{{t}}_.Write(w, k)
+}
+
+func Serve{{type}}(prefix string, muxes ...*http.ServeMux) {
+	path := prefix + {{kind}} + "/"
+
+	if len(muxes) == 0 {
+		http.Handle(path, http.StripPrefix(path, {{type}}Handler{}))
+	}
+
+	for _, mux := range muxes {
+		mux.Handle(path, http.StripPrefix(path, {{type}}Handler{}))
+	}
 }

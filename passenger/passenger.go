@@ -1,5 +1,3 @@
-// +build appenginevm
-
 package passenger
 
 import (
