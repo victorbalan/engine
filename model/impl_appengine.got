@@ -1,5 +1,3 @@
-// +build appenginevm
-
 package model
 
 import (
