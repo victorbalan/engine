@@ -1,6 +1,6 @@
 // This file was automatically generated from
 //
-//	access_token.go
+//	code_task.go
 //
 // by
 //
@@ -21,10 +21,10 @@ import (
 	"google.golang.org/appengine/datastore"
 )
 
-type AccessTokens []AccessToken
+type CodeTasks []CodeTask
 
 // Write takes a key and the corresponding writes it out to w after marshaling to JSON.
-func (ƨ AccessToken) Write(w http.ResponseWriter, key *datastore.Key) {
+func (ƨ CodeTask) Write(w http.ResponseWriter, key *datastore.Key) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.Write([]byte(`{"`))
 	//w.Write([]byte(strconv.FormatInt(key.IntID(), 10)))
@@ -36,7 +36,7 @@ func (ƨ AccessToken) Write(w http.ResponseWriter, key *datastore.Key) {
 }
 
 // Write will write out all Entities to w in JSON format.
-func (ƨ AccessTokens) Write(w http.ResponseWriter, keys []*datastore.Key) {
+func (ƨ CodeTasks) Write(w http.ResponseWriter, keys []*datastore.Key) {
 	if len(keys) != len(ƨ) {
 		http.Error(w, "length mismatch while writing entities", http.StatusInternalServerError)
 		return
