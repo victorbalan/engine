@@ -2,8 +2,8 @@ package util
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
-	"strings"
 )
 
 // SetCookie is a simple wrapper around http.SetCookie that
@@ -17,15 +17,13 @@ func SetCookie(w http.ResponseWriter, cookie *http.Cookie) {
 // uses an allowed request method.
 // If the request method is not one of methods, CheckMethod
 // will answer the request and return false.
-func CheckMethod(w http.ResponseWriter, r *http.Request, methods ...string) (ok bool) {
+func CheckMethod(r *http.Request, methods ...string) error {
 	for _, method := range methods {
 		if method == r.Method {
-			return true
+			return nil
 		}
 	}
-	w.Header().Set("Allow", strings.Join(methods, ", "))
-	http.Error(w, "Invalid method "+r.Method+" not allowed.", http.StatusMethodNotAllowed)
-	return
+	return errors.New("Invalid method " + r.Method + " not allowed.")
 }
 
 // WriteMap marshals a map into json and writes it to the client
