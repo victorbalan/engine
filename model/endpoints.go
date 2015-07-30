@@ -1,7 +1,5 @@
 package model
 
-import "net/url"
-
 // Endpoints encapsulates two possible
 // ways to deliver the outcome of trying
 // to fulfill an assignment.
@@ -15,5 +13,8 @@ type Endpoints struct {
 	//
 	// NOTE(flowlo): No backwards-compatibility
 	// guarantee on this.
-	GitRepository url.URL
+	//
+	// TODO(flowlo): Investigate why we can not use
+	// url.URL
+	GitRepository string
 }
