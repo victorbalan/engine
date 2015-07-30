@@ -2,7 +2,7 @@ package model
 
 import "net/mail"
 
-//go:generate generator
+//go:generate generator -c "Profile"
 
 // User is anybody interacting with our systems. It will
 // ultimately refer to who accessed Coduno (or on whose

@@ -3,10 +3,10 @@ package model
 import (
 	"time"
 
-	"google.golang.org/cloud/datastore"
+	"google.golang.org/appengine/datastore"
 )
 
-//go:generate generator
+//go:generate generator -c "Submission"
 
 // Result holds the performance of an User for some
 // Challenge. It is fixed once the user has completed

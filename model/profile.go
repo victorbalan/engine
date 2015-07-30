@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-//go:generate generator
+//go:generate generator -c "Result"
 
 // Profile is the current rating of a User. It
 // can vary over times as new Results come in

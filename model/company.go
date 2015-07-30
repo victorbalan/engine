@@ -2,7 +2,7 @@ package model
 
 import "net/mail"
 
-//go:generate generator
+//go:generate generator -c "Challenge,User"
 
 // Company contains the data related to a company.
 //

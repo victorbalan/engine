@@ -3,7 +3,7 @@ package model
 import (
 	"time"
 
-	"google.golang.org/cloud/datastore"
+	"google.golang.org/appengine/datastore"
 )
 
 //go:generate generator
@@ -43,3 +43,5 @@ type Submission struct {
 	Time time.Time
 	Task *datastore.Key
 }
+
+// /api/users/bfsdlf/profiles/jkadfgsdfg/results/sldfng/codeSubmissions/lasdbfd/

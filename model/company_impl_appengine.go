@@ -4,11 +4,11 @@
 //
 // by
 //
-//	generator
+//	generator -c Challenge,User
 //
 // at
 //
-//	2015-07-29T17:40:11+03:00
+//	2015-07-30T11:22:25+03:00
 //
 // Do not edit it!
 
@@ -33,7 +33,7 @@ func (ƨ Company) Save(ctx context.Context, key ...*datastore.Key) (*datastore.K
 		return datastore.Put(ctx, key[0], &ƨ)
 	}
 
-	return datastore.Put(ctx, datastore.NewIncompleteKey(ctx, "companys", nil), &ƨ)
+	return datastore.Put(ctx, datastore.NewIncompleteKey(ctx, "companies", nil), &ƨ)
 }
 
 // SaveWithParent can be used to save this Company as child of another
@@ -43,13 +43,13 @@ func (ƨ Company) SaveWithParent(ctx context.Context, parent *datastore.Key) (*d
 	if parent == nil {
 		return nil, errors.New("parent key is nil, expected a valid key")
 	}
-	return datastore.Put(ctx, datastore.NewIncompleteKey(ctx, "companys", parent), &ƨ)
+	return datastore.Put(ctx, datastore.NewIncompleteKey(ctx, "companies", parent), &ƨ)
 }
 
 // NewQueryForCompany prepares a datastore.Query that can be
 // used to query entities of type Company.
 func NewQueryForCompany() *datastore.Query {
-	return datastore.NewQuery("companys")
+	return datastore.NewQuery("companies")
 }
 
 type CompanyHandler struct{}
@@ -71,7 +71,7 @@ func (ƨ CompanyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func ServeCompany(prefix string, muxes ...*http.ServeMux) {
-	path := prefix + "companys" + "/"
+	path := prefix + "companies" + "/"
 
 	if len(muxes) == 0 {
 		http.Handle(path, http.StripPrefix(path, CompanyHandler{}))

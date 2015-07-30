@@ -1,6 +1,6 @@
 package model
 
-import "google.golang.org/cloud/datastore"
+import "google.golang.org/appengine/datastore"
 
 //go:generate generator
 
